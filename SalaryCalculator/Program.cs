@@ -32,7 +32,7 @@ namespace SalaryCalculator
             {
                 var sale = new Sale();
 
-                Console.WriteLine($"Введите информацию по продаже №{i}. ");
+                //Console.WriteLine($"Введите информацию по продаже №{i}. ");
 
                 Console.WriteLine($"Введите сумму продажи №{i}: ");
                 sale.Amount = Convert.ToDouble(Console.ReadLine()?.Replace('.',','));
