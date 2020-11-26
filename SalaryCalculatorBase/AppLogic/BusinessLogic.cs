@@ -17,7 +17,7 @@ namespace SalaryCalculatorBase.AppLogic
             return actualSalary;
         }
 
-        private static double GetSalaryWithoutTaxes(double fullSalary, double tax)
+        public static double GetSalaryWithoutTaxes(double fullSalary, double tax)
         {
             var result = fullSalary * (1 - tax);
 
