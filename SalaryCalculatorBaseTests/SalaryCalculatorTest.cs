@@ -21,7 +21,7 @@ namespace SalaryCalculatorBaseTests
         public void GetSalaryWithoutTaxes_Always_ReturnsExpectedResult()
         {
             // Arrange
-            CalculatorHelper calculatorHelper = new CalculatorHelper();
+            var calculatorHelper = CreateDefaultCalculatorHelper();
             double result;
 
             //Act
@@ -36,7 +36,7 @@ namespace SalaryCalculatorBaseTests
         public void GetPercentBySum_WhenEqual_ReturnsSevenPercent()
         {
             // Arrange
-            CalculatorHelper calculatorHelper = new CalculatorHelper();
+            var calculatorHelper = CreateDefaultCalculatorHelper();
             Mock<ISalaryCalculator> mock = new Mock<ISalaryCalculator>();
             mock.Setup(m => m.GetActualSum(It.IsAny<List<Sale>>()))
                 .Returns<double>(d => Convert.ToDouble(5000));
@@ -55,7 +55,7 @@ namespace SalaryCalculatorBaseTests
         public void GetCongratulationsPhrase_WhenBig_ReturnsPhraseWithWow()
         {
             // Arrange
-            CalculatorHelper calculatorHelper = new CalculatorHelper();
+            var calculatorHelper = CreateDefaultCalculatorHelper();
 
             var bonusAmount = new Bonus() {Amount = 1500.0, CongratulationsPhrase = ""};
 
@@ -63,7 +63,7 @@ namespace SalaryCalculatorBaseTests
             mock.Setup(m => m.GetSalaryFromSales(It.IsAny<double>(), It.IsAny<double>(), It.IsAny<List<Sale>>())).Returns((Bonus)bonusAmount);
             
             // Act
-            var actualBonus = calculatorHelper.GetCongratulationsPhrase(mock.Object.GetSalaryFromSales(0, 0, null));
+            var actualBonus = calculatorHelper.FillCongratulationsPhrase(mock.Object.GetSalaryFromSales(0, 0, null));
 
             // Assert
             Assert.True(actualBonus.CongratulationsPhrase.Contains("Œ„Ó"));
@@ -76,7 +76,7 @@ namespace SalaryCalculatorBaseTests
         public void GetSalaryFromSales_Always_ReturnsCorrectAmount()
         {
             // Arrange
-            CalculatorHelper calculatorHelper = new CalculatorHelper();
+            var calculatorHelper = CreateDefaultCalculatorHelper();
 
             var sales = new List<Sale>();
             sales.Add(new Sale
@@ -100,8 +100,24 @@ namespace SalaryCalculatorBaseTests
 
             // Assert
             Assert.AreEqual(Convert.ToDouble(90), bonusFromSales.Amount);
-
         }
 
+        [Test]
+        public void GetPercentByMonth_InJanuary_ReturnsOne()
+        {
+            // Arrange
+            var calculatorHelper = CreateDefaultCalculatorHelper();
+            var staticClock = new StaticClock();
+
+            // Act
+            var percent = calculatorHelper.GetPercentByMonth(staticClock.Now.Month);
+
+            // Assert
+            Assert.AreEqual(0.1, percent);
+        }
+        private CalculatorHelper CreateDefaultCalculatorHelper()
+        {
+            return new CalculatorHelper();
+        }
     }
 }

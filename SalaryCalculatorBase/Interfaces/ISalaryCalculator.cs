@@ -8,7 +8,7 @@ using SalaryCalculatorBase.Models;
 
 namespace SalaryCalculatorBase.Interfaces
 {
-     public interface ISalaryCalculator
+    public interface ISalaryCalculator
     {
         double GetSalaryWithoutTaxes(double fullSalary, double tax);
         double GetFullSalary(double salaryFromSales, double baseSalary);
@@ -16,6 +16,7 @@ namespace SalaryCalculatorBase.Interfaces
         double GetPercentBySum(double planSum, double actualSum);
         double GetActualSum(List<Sale> salesList);
         double GetBonusForEachSale(double planSales, double actualSales);
-        Bonus GetCongratulationsPhrase(Bonus bonus);
+        Bonus FillCongratulationsPhrase(Bonus bonus);
+        double GetPercentByMonth(int monthNumber);
     }
 }

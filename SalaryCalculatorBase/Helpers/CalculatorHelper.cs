@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using SalaryCalculator;
 using SalaryCalculatorBase.Interfaces;
 using SalaryCalculatorBase.Models;
@@ -86,7 +87,7 @@ namespace SalaryCalculatorBase.Helpers
             return result;
         }
 
-        public Bonus GetCongratulationsPhrase(Bonus bonus)
+        public Bonus FillCongratulationsPhrase(Bonus bonus)
         {
             var result = new Bonus();
             result.Amount = bonus.Amount;
@@ -98,6 +99,48 @@ namespace SalaryCalculatorBase.Helpers
             } else
             {
                 result.CongratulationsPhrase = $"Ого! Ваш бонус составляет: {bonus.Amount} рублей.";
+            }
+            return result;
+        }
+
+        public double GetPercentByMonth(int monthNumber)
+        {
+            var result = 0.1;
+
+            switch (monthNumber)
+            {
+                case 1:
+                    result = 0.1;
+                    break;
+                case 2:
+                    result = 0.2;
+                    break;
+                case 3:
+                    result = 0.3;
+                    break;
+                case 4:
+                    result = 0.4;
+                    break;
+                case 5:
+                    result = 0.5;
+                    break;
+                case 6:
+                    result = 0.6;
+                    break;
+                case 7:
+                    result = 0.7;
+                    break;
+                case 8:
+                    result = 0.8;
+                    break;
+                case 9:
+                    result = 0.9;
+                    break;
+                case 10:
+                case 11:
+                case 12:
+                    result = 1.0;
+                    break;
             }
             return result;
         }
