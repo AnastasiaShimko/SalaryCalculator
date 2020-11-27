@@ -5,6 +5,7 @@ using NUnit.Framework;
 using SalaryCalculator;
 using SalaryCalculatorBase;
 using SalaryCalculatorBase.Helpers;
+using SalaryCalculatorBase.Interfaces;
 
 namespace SalaryCalculatorBaseTests
 {
@@ -31,14 +32,22 @@ namespace SalaryCalculatorBaseTests
 
 
         [Test]
-        public void GetPercentBySum_Always_ReturnsExpectedResult()
+        public void GetPercentBySum_WhenEqual_ReturnsSevenPercent()
         {
             // Arrange
-           
-            //Act
+            CalculatorHelper calculatorHelper = new CalculatorHelper();
+            Mock<ISalaryCalculator> mock = new Mock<ISalaryCalculator>();
+            mock.Setup(m => m.GetActualSum(It.IsAny<List<Sale>>()))
+                .Returns<double>(d => Convert.ToDouble(5000));
 
-            //Assert
-           
+            var planSum = 5000;
+
+            // Act
+            var workerPercent = calculatorHelper.GetPercentBySum(planSum, mock.Object.GetActualSum(null));
+
+            // Assert
+            Assert.AreEqual(workerPercent, 0.07);
+
         }
     }
 }

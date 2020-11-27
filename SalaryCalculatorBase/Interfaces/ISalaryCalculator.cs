@@ -7,7 +7,7 @@ using SalaryCalculator;
 
 namespace SalaryCalculatorBase.Interfaces
 {
-    interface ISalaryCalculator
+     public interface ISalaryCalculator
     {
         double GetSalaryWithoutTaxes(double fullSalary, double tax);
         double GetFullSalary(double salaryFromSales, double baseSalary);
