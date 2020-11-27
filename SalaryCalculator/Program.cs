@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SalaryCalculatorBase;
 
 namespace SalaryCalculator
 {
@@ -11,6 +9,8 @@ namespace SalaryCalculator
     {
         public static void Main(string[] args)
         {
+            Init.StartUp();
+
             Console.WriteLine("Введите ваш оклад: ");
             var baseSalary = Convert.ToDouble(Console.ReadLine()?.Replace('.', ','));
 
