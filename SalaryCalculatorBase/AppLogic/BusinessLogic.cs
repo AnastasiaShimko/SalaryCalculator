@@ -20,7 +20,7 @@ namespace SalaryCalculatorBase.AppLogic
             var salaryFromSales = Global.CalculatorHelper.GetSalaryFromSales(workerPercent, eachSaleBonus, salesList);
             
             // Суммируем оклад и прибавку
-            var fullSalary = Global.CalculatorHelper.GetFullSalary(salaryFromSales, baseSalary);
+            var fullSalary = Global.CalculatorHelper.GetFullSalary(salaryFromSales.Amount, baseSalary);
 
             // Вычитаем налоги из полной зарплаты
             var actualSalary = Global.CalculatorHelper.GetSalaryWithoutTaxes(fullSalary, tax);

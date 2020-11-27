@@ -6,6 +6,7 @@ using SalaryCalculator;
 using SalaryCalculatorBase;
 using SalaryCalculatorBase.Helpers;
 using SalaryCalculatorBase.Interfaces;
+using SalaryCalculatorBase.Models;
 
 namespace SalaryCalculatorBaseTests
 {
@@ -47,6 +48,25 @@ namespace SalaryCalculatorBaseTests
 
             // Assert
             Assert.AreEqual(workerPercent, 0.07);
+
+        }
+
+        [Test]
+        public void GetCongratulationsPhrase_WhenBig_ReturnsPhraseWithWow()
+        {
+            // Arrange
+            CalculatorHelper calculatorHelper = new CalculatorHelper();
+
+            var bonusAmount = new Bonus() {Amount = 1500.0, CongratulationsPhrase = ""};
+
+            Mock<ISalaryCalculator> mock = new Mock<ISalaryCalculator>();
+            mock.Setup(m => m.GetSalaryFromSales(It.IsAny<double>(), It.IsAny<double>(), It.IsAny<List<Sale>>())).Returns((Bonus)bonusAmount);
+            
+            // Act
+            var actualBonus = calculatorHelper.GetCongratulationsPhrase(mock.Object.GetSalaryFromSales(0, 0, null));
+
+            // Assert
+            Assert.True(actualBonus.CongratulationsPhrase.Contains("Œ„Ó"));
 
         }
     }

@@ -46,6 +46,7 @@
     <Compile Include="Helpers\CalculatorHelper.cs" />
     <Compile Include="Init.cs" />
     <Compile Include="Interfaces\ISalaryCalculator.cs" />
+    <Compile Include="Models\Bonus.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Models\Sale.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

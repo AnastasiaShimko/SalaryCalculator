@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using SalaryCalculator;
 using SalaryCalculatorBase.Interfaces;
+using SalaryCalculatorBase.Models;
 
 namespace SalaryCalculatorBase.Helpers
 {
@@ -18,12 +19,12 @@ namespace SalaryCalculatorBase.Helpers
             return salaryFromSales + baseSalary;
         }
 
-        public double GetSalaryFromSales(double workerPercent, double eachSaleBonus, List<Sale> salesList)
+        public Bonus GetSalaryFromSales(double workerPercent, double eachSaleBonus, List<Sale> salesList)
         {
-            double result = 0;
+            Bonus result = new Bonus();
             foreach (var sum in salesList)
             {
-                result += (sum.Amount * workerPercent) + eachSaleBonus;
+                result.Amount += (sum.Amount * workerPercent) + eachSaleBonus;
             }
             return result;
         }
@@ -81,6 +82,22 @@ namespace SalaryCalculatorBase.Helpers
             else
             {
                 result = 70;
+            }
+            return result;
+        }
+
+        public Bonus GetCongratulationsPhrase(Bonus bonus)
+        {
+            var result = new Bonus();
+            result.Amount = bonus.Amount;
+
+            if (bonus.Amount < 1000)
+            {
+                result.CongratulationsPhrase = $"Ваш бонус составляет всего лишь: {bonus.Amount} рублей.";
+
+            } else
+            {
+                result.CongratulationsPhrase = $"Ого! Ваш бонус составляет: {bonus.Amount} рублей.";
             }
             return result;
         }
