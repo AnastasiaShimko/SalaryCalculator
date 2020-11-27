@@ -69,5 +69,39 @@ namespace SalaryCalculatorBaseTests
             Assert.True(actualBonus.CongratulationsPhrase.Contains("Œ„Ó"));
 
         }
+
+        //GetSalaryFromSales
+
+        [Test]
+        public void GetSalaryFromSales_Always_ReturnsCorrectAmount()
+        {
+            // Arrange
+            CalculatorHelper calculatorHelper = new CalculatorHelper();
+
+            var sales = new List<Sale>();
+            sales.Add(new Sale
+            {
+                Client = null,
+                Amount = 100.0
+            });
+            sales.Add(new Sale
+            {
+                Client = null,
+                Amount = 200.0
+            });
+            sales.Add(new Sale
+            {
+                Client = null,
+                Amount = 300.0
+            });
+
+            // Act
+            var bonusFromSales = calculatorHelper.GetSalaryFromSales(0.1, 10, sales);
+
+            // Assert
+            Assert.AreEqual(Convert.ToDouble(90), bonusFromSales.Amount);
+
+        }
+
     }
 }

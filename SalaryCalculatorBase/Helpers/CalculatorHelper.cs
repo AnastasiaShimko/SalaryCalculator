@@ -24,7 +24,7 @@ namespace SalaryCalculatorBase.Helpers
             Bonus result = new Bonus();
             foreach (var sum in salesList)
             {
-                result.Amount += (sum.Amount * workerPercent) + eachSaleBonus;
+                result.Amount += ((sum.Amount * workerPercent) + eachSaleBonus);
             }
             return result;
         }
